@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>System Breach</title>
+
+<style>
+body {
+    background: black;
+    color: lime;
+    font-family: monospace;
+    padding: 20px;
+    overflow: hidden;
+}
+
+#text {
+    height: 80vh;
+    overflow-y: auto;
+}
+
+#progress {
+    width: 100%;
+    height: 20px;
+    background: #111;
+    margin-top: 10px;
+}
+
+#bar {
+    height: 100%;
+    width: 0%;
+    background: red;
+}
+
+.popup {
+    position: fixed;
+    background: black;
+    color: red;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="text"></div>
+
+<div id="progress"><div id="bar"></div></div>
+
+<script>
+let textDiv = document.getElementById("text");
+
+// 🧠 1. Fake log 120 dòng
+let lines = [];
+for(let i = 1; i <= 120; i++) {
+    let rand = Math.floor(Math.random() * 9999);
+    lines.push("[LOG " + i + "] Access file_" + rand + ".sys ... OK");
+}
+
+lines.push("[WARNING] Virus detected ⚠");
+lines.push("[ACTION] Encrypting data...");
+lines.push("[UPLOAD] Sending files...");
+lines.push("💀 SYSTEM COMPROMISED 💀");
+
+// ⌨️ 2. Hiệu ứng gõ chữ
+let i = 0, j = 0;
+
+function typeEffect() {
+    if(i < lines.length) {
+        if(j < lines[i].length) {
+            textDiv.innerHTML += lines[i].charAt(j);
+            j++;
+            setTimeout(typeEffect, 5);
+        } else {
+            textDiv.innerHTML += "<br>";
+            i++;
+            j = 0;
+            textDiv.scrollTop = textDiv.scrollHeight;
+            setTimeout(typeEffect, 10);
+        }
+    }
+}
+typeEffect();
+
+// 📊 3. Thanh loading
+let progress = 0;
+let bar = document.getElementById("bar");
+
+let load = setInterval(() => {
+    progress += Math.random() * 5;
+    bar.style.width = progress + "%";
+
+    if(progress >= 100) {
+        clearInterval(load);
+        textDiv.innerHTML += "COMPLETEsh("[WARNING] Virus detected ⚠");
+lines.push("[ACTION] Encrypting data...");
+lines.push("[UPLOAD] Sending files...");
+lines.push("💀 SYSTEM COMPROMISED 💀");
+
+// ⌨️ 2. Hiệu ứng gõ chữ
+let i = 0, j = 0;
+
+function typeEffect() {
+    if(i < lines.length) {
+        if(j < lines[i].length) {
+            textDiv.innerHTML += lines[i].charAt(j);
+            j++;
+            setTimeout(typeEffect, 5);
+        } else {
+            textDiv.innerHTML += "<br>";
+            i++;
+            j = 0;
+            textDiv.scrollTop = textDiv.scrollHeight;
+            setTimeout(typeEffect, 10);
+        }
+    }
+}
+typeEffect();
+
+// 📊 3. Thanh loading
+let progress = 0;
+let bar = document.getElementById("bar");
+
+let load = setInterval(() => {
+    progress += Math.random() * 5;
+    bar.style.width = progress + "%";
+
+    if(progress >= 100) {
+        clearInterval(load);
+        textDiv.innerHTML += "..........COMPLETE.........";
+    }
+}, 200);
+
+// 🔴 4. Nhấp nháy nền
+setInterval(() => {
+    document.body.style.background =
+        document.body.style.background === "black" ? "#200000" : "black";
+}, 300);
+
+// 🪟 5. Popup random
+function createPopup() {
+    let div = document.createElement("div");
+    div.className = "popup";
+    div.innerHTML = "⚠ Virus detected!";
+    div.style.top = Math.random() * window.innerHeight + "px";
+    div.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(div);
+
+    setTimeout(() => div.remove(), 2000);
+}
+
+setInterval(createPopup, 800);
+
+// 😈 6. Fake gõ lệnh hacker
+let commands = [
+"> connecting...",
+"> bypassing firewall...",
+"> accessing camera...",
+"> uploading data...",
+"> done!"
+];
+
+let cmdIndex = 0;
+setInterval(() => {
+    if(cmdIndex < commands.length) {
+        textDiv.innerHTML += commands[cmdIndex] + "<br>";
+        cmdIndex++;
+    }
+}, 1500);
+
+</script>
+
+</body>
+</html>
